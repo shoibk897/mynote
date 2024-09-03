@@ -9,13 +9,27 @@
 <body>
     <div class="myNotes bg-black">
         <div class="nav bg-white">
-            <div class="nav-box bg-red"></div>
-            <div class="nav-box bg-yellow"></div>
-            <div class="nav-box bg-green"></div>
+            <button class="nav-box bg-red"></button>
+            <button class="nav-box bg-yellow"></button>
+            <button class="nav-box bg-green notes__add"></button>
         </div>
         <div class="notes bg-white" id="app">
-
+            <div class="notes__sidebar">
+                <div class="notes__list">
+                    <div class="notes__list-item notes__list-item--selected ">
+                        <div class="notes__small-tittle">Lecture Notes</div>
+                        <div class="notes__small-body">This is my lecture notes</div>
+                        <div class="notes__small-updated">Monday 3:30pm</div>
+                    </div>
+                </div>
+            </div>
+            <div class="notes__preview">
+                <input type="text" class="notes__title" placeholder="Enter tittle">
+                <textarea class="notes__body">THis is notes body.......</textarea>
+            </div>
         </div>
     </div>
+
+    <script src="index.js"></script>
 </body>
 </html>
