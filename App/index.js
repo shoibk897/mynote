@@ -14,7 +14,7 @@ class NoteView {
             <div class="notes bg-white" >
                 <div class="notes__sidebar " id="sidebar">
                     <div class="notes__list">
-                        <div class="notes__list-item notes__list-item--selected ">
+                        <div class="notes__list-item">
                         </div>
                     </div>
                 </div>
@@ -25,18 +25,43 @@ class NoteView {
             </div>
         `;
 
-        const btnAdd = this.root.querySelector(".notes__add")
-        const btnDel = this.root.querySelector(".notes__del")
-        const inpTitle = this.root.querySelector(".notes__title")
-        const inpBody = this.root.querySelector(".notes__body")
+        this.btnAdd = this.root.querySelector(".notes__add");
+        this.btnDel = this.root.querySelector(".notes__del");
+        this.inpTitle = this.root.querySelector(".notes__title");
+        this.inpBody = this.root.querySelector(".notes__body");
 
-
-        btnAdd.addEventListener("click", () => {
+        this.btnAdd.addEventListener("click", () => {
             this.onNoteAdd();
         });
 
+        [this.inpTitle, this.inpBody].forEach(inpField => {
+            inpField.addEventListener("blur", () => {
+                const updatedTitle = this.inpTitle.value.trim();
+                const updatedBody = this.inpBody.value.trim();
+
+                this.onNoteEdit(updatedTitle, updatedBody);
+            });
+        });
+
     }
-    
+
+
+    _createNoteListItemHTML(id, title, body, updated) {
+        const MAX_BODY_LENGTH = 60;
+        return `
+            <div class="notes__list-item" data-note-id="${id}">
+                <div class="notes__small-title">${title}</div>
+                <div class="notes__small-body">
+                    ${body.substring(0, MAX_BODY_LENGTH)}
+                    ${body.length > MAX_BODY_LENGTH ? "..." : ""}
+                </div>
+                <div class="notes__small-updated">
+                    ${updated.toLocaleString('en-GB', { dateStyle: "full", timeStyle: "short" })}
+                </div>
+            </div>
+        `;
+    }
+
 }
 
 // TOOGLE SIDE BAR
@@ -84,14 +109,14 @@ function deleteNote(id) {
 function render() {
     const app = document.getElementById("app");
     const view = new NoteView(app, {
-        onNoteSelect() {
-            console.log("note selected");
+        onNoteSelect(id) {
+            console.log("note selected " + id);
         },
         onNoteAdd() {
             console.log("Let's add a new note");
         },
-        onNoteDelete() {
-            console.log("note deleted succes");
+        onNoteDelete(id) {
+            console.log("note deleted : " + id);
         },
         onNoteEdit(newTitle, newBody) {
             console.log(newTitle);

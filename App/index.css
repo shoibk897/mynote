@@ -28,6 +28,7 @@ body {
 }
 
 .notes__sidebar.open {
+    border: none;
     transform: translateX(-99%);
 }
 
@@ -70,6 +71,7 @@ body {
     color: #aaaaaa;
     font-style: italic;
     text-align: right;
+    font-size: 14px;
 }
 
 .notes__preview {
