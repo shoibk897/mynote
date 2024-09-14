@@ -31,6 +31,9 @@ body {
     transform: translateX(-99%);
 }
 
+.notes__del:hover{
+    background-color: red;
+}
 
 .notes__add:hover {
     background: #00af8c;
@@ -134,7 +137,7 @@ body {
     background-color: white;
 }
 .bg-red{
-    background-color: red;
+    background-color: rgb(209, 0, 0);
 }
 .bg-yellow{
     background-color: rgb(230, 230, 0);
