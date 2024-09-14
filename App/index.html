@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
     <div class="myNotes bg-black">
         <div class="nav bg-white">
             <button class="nav-box bg-red"></button>
-            <button class="nav-box bg-yellow"></button>
+            <button class="nav-box bg-yellow toggle-btn"></button>
             <button class="nav-box bg-green notes__add"></button>
         </div>
         <div class="notes bg-white" id="app">
-            <div class="notes__sidebar">
+            <div class="notes__sidebar " id="sidebar">
                 <div class="notes__list">
                     <div class="notes__list-item notes__list-item--selected ">
                         <div class="notes__small-tittle">Lecture Notes</div>
@@ -32,4 +34,5 @@
 
     <script src="index.js"></script>
 </body>
+
 </html>
