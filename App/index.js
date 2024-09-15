@@ -61,6 +61,39 @@ class NoteView {
             </div>
         `;
     }
+    updateNoteList(notes) {
+        const noteListContainer = this.root.querySelector(".notes__list");
+
+        // CREATE AN EMPTY FIRST THEN UPDATING
+        noteListContainer.innerHTML = "";
+
+        for (const note of notes) {
+            const html = this._createNoteListItemHTML(note.id, note.title, note.body, new Date(note.updated));
+
+            noteListContainer.insertAdjacentHTML("beforeend", html);
+        }
+
+        // SELECT THE LIST 
+        noteListContainer.querySelectorAll(".notes__list-item").forEach(noteItem => {
+            noteItem.addEventListener("click", () => {
+                noteListContainer.querySelectorAll(".notes__list-item").forEach(item => item.classList.remove("notes__list-item--selected"));
+                noteItem.classList.add("notes__list-item--selected");
+                this.onNoteSelect(noteItem.dataset.noteId);
+            });
+
+        });
+        
+        // DELETE THE SELECTED LIST
+        this.btnDel.addEventListener("click", () => {
+            const selectedNoteId = this.root.querySelector(".notes__list-item--selected")?.dataset.noteId;
+            if (selectedNoteId) {
+                const doDelete = confirm("Are you sure you want to delete this note?");
+                if (doDelete) {
+                    this.onNoteDelete(selectedNoteId);
+                }
+            }
+        });
+    }
 
 }
 
@@ -123,5 +156,7 @@ function render() {
             console.log(newBody);
         }
     });
+
+    view.updateNoteList(getAllNotes());
 }
 render()
