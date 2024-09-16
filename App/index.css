@@ -17,19 +17,20 @@ body {
 
 }
 
+/* fix - add transiton */
 .notes__sidebar {
     border-right: 2px solid #dddddd;
     flex-shrink: 0;
     overflow-y: auto;
     padding: 1em;
     width: 300px;
-    transform: translateX(0); 
-    transition: transform 0.3s ease;
+    display: block;
+    transition:  0.3s ease;
 }
 
 .notes__sidebar.open {
     border: none;
-    transform: translateX(-99%);
+    display: none;
 }
 
 .notes__del:hover{
@@ -101,39 +102,8 @@ body {
     resize: none;
 }
 
-.p-5 {
-    padding: 5px;
-}
-.p-10 {
-    padding: 10px;
-}
-.p-15 {
-    padding: 15px;
-}
-.p-20 {
-    padding: 20px;
-}
-.m-5 {
-    margin: 5px;
-}
-.m-10 {
-    margin: 10px;
-}
-.m-15 {
-    margin: 15px;
-}
-.m-20 {
-    margin: 20px;
-}
-
-.text-black {
-    color: black;
-}
 .bg-black{
     background-color: black;
-}
-.text-white {
-    color: white;
 }
 .bg-white{
     background-color: white;

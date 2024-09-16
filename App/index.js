@@ -43,6 +43,8 @@ class NoteView {
             });
         });
 
+        this.updateNotePreivewVisibility(false);
+
     }
 
 
@@ -61,6 +63,7 @@ class NoteView {
             </div>
         `;
     }
+
     updateNoteList(notes) {
         const noteListContainer = this.root.querySelector(".notes__list");
 
@@ -76,13 +79,13 @@ class NoteView {
         // SELECT THE LIST 
         noteListContainer.querySelectorAll(".notes__list-item").forEach(noteItem => {
             noteItem.addEventListener("click", () => {
-                noteListContainer.querySelectorAll(".notes__list-item").forEach(item => item.classList.remove("notes__list-item--selected"));
+                // noteListContainer.querySelectorAll(".notes__list-item").forEach(item => item.classList.remove("notes__list-item--selected"));
                 noteItem.classList.add("notes__list-item--selected");
-                this.onNoteSelect(noteItem.dataset.noteId);
+                // this.onNoteSelect(noteItem.dataset.noteId);
             });
 
         });
-        
+
         // DELETE THE SELECTED LIST
         this.btnDel.addEventListener("click", () => {
             const selectedNoteId = this.root.querySelector(".notes__list-item--selected")?.dataset.noteId;
@@ -95,6 +98,19 @@ class NoteView {
         });
     }
 
+    updateActiveNote(note) {
+        this.root.querySelector(".notes__title").value = note.title;
+        this.root.querySelector(".notes__body").value = note.body;
+
+        this.root.querySelectorAll(".notes__list-item").forEach(item => {
+             item.classList.remove("notes__list-item--selected") 
+        });
+        this.root.querySelector(`.notes__list-item[data-note-id="${note.id}"]`).classList.add("notes__list-item--selected");
+    }
+
+    updateNotePreivewVisibility(visible) {
+        this.root.querySelector('.notes__preview').style.visibility = visible ? "visible" : "hidden";
+    }
 }
 
 // TOOGLE SIDE BAR
@@ -106,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         sidebar.classList.toggle('open');
     });
 });
+
 
 function getAllNotes() {
     const note = JSON.parse(localStorage.getItem("notesapp-notes") || "[]");
@@ -157,6 +174,8 @@ function render() {
         }
     });
 
+    const NOTE = getAllNotes();
     view.updateNoteList(getAllNotes());
+    view.updateActiveNote(NOTE[0])
 }
 render()
