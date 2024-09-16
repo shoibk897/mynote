@@ -156,26 +156,33 @@ function deleteNote(id) {
 }
 
 
-function render() {
-    const app = document.getElementById("app");
-    const view = new NoteView(app, {
-        onNoteSelect(id) {
-            console.log("note selected " + id);
-        },
-        onNoteAdd() {
-            console.log("Let's add a new note");
-        },
-        onNoteDelete(id) {
-            console.log("note deleted : " + id);
-        },
-        onNoteEdit(newTitle, newBody) {
-            console.log(newTitle);
-            console.log(newBody);
-        }
-    });
+class App{
+    constructor(root){
+        this.notes = [];
+        this.activeNote = null;
+        this.view = new NoteView(root,this._handlers());
 
-    const NOTE = getAllNotes();
-    view.updateNoteList(getAllNotes());
-    view.updateActiveNote(NOTE[0])
+        
+    }
+
+    _handlers(){
+        return {
+            onNoteSelect : noteId =>{
+                console.log("Selectd Notes : " + noteId);
+            },
+            onNoteAdd : () =>{
+                console.log("Notes Added");
+            },
+            onNoteDelete : noteId =>{
+                console.log("Deleted Notes : " + noteId);
+            },
+            onNoteEdit : (newTitle,newbody) =>{
+                console.log(newTitle);
+                console.log(newbody);
+            },
+        };
+    }
 }
-render()
+
+const root = document.getElementById("app");
+const app = new App(root)
