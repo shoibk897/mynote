@@ -1,3 +1,34 @@
+function getAllNotes() {
+    const note = JSON.parse(localStorage.getItem("notesapp-notes") || "[]");
+    return note.sort((a, b) => {
+        return new Date(a.updated) > new Date(b.updated) ? -1 : 1;
+    });
+}
+
+function saveNote(noteToSave) {
+    const notes = getAllNotes();
+
+    const existing = notes.find((note) => note.id === noteToSave.id)
+    //EIDT OR UPDATED
+    if (existing) {
+        existing.title = noteToSave.title;
+        existing.body = noteToSave.body;
+        existing.updated = new Date().toISOString();
+    } else {
+        noteToSave.id = Math.floor(Math.random() * 1000000);
+        noteToSave.updated = new Date().toISOString();
+        notes.push(noteToSave);
+    }
+
+    localStorage.setItem("notesapp-notes", JSON.stringify(notes));
+}
+
+function deleteNote(id) {
+    const notes = getAllNotes();
+    const newNote = notes.filter((note) => note.id != id);
+    localStorage.setItem("notesapp-notes", JSON.stringify(newNote));
+}
+
 class NoteView {
     constructor(root, { onNoteSelect, onNoteAdd, onNoteDelete, onNoteEdit } = {}) {
         this.root = root;
@@ -79,9 +110,7 @@ class NoteView {
         // SELECT THE LIST 
         noteListContainer.querySelectorAll(".notes__list-item").forEach(noteItem => {
             noteItem.addEventListener("click", () => {
-                // noteListContainer.querySelectorAll(".notes__list-item").forEach(item => item.classList.remove("notes__list-item--selected"));
-                noteItem.classList.add("notes__list-item--selected");
-                // this.onNoteSelect(noteItem.dataset.noteId);
+                this.onNoteSelect(noteItem.dataset.noteId);
             });
 
         });
@@ -103,7 +132,7 @@ class NoteView {
         this.root.querySelector(".notes__body").value = note.body;
 
         this.root.querySelectorAll(".notes__list-item").forEach(item => {
-             item.classList.remove("notes__list-item--selected") 
+            item.classList.remove("notes__list-item--selected")
         });
         this.root.querySelector(`.notes__list-item[data-note-id="${note.id}"]`).classList.add("notes__list-item--selected");
     }
@@ -122,63 +151,60 @@ document.addEventListener('DOMContentLoaded', () => {
         sidebar.classList.toggle('open');
     });
 });
-
-
-function getAllNotes() {
-    const note = JSON.parse(localStorage.getItem("notesapp-notes") || "[]");
-    return note.sort((a, b) => {
-        return new Date(a.updated) > new Date(b.updated) ? -1 : 1;
-    });
-}
-
-function saveNote(noteToSave) {
-    const notes = getAllNotes();
-
-    const existing = notes.find((note) => note.id === noteToSave.id)
-    //EIDT OR UPDATED
-    if (existing) {
-        existing.title = noteToSave.title;
-        existing.body = noteToSave.body;
-        existing.updated = new Date().toISOString();
-    } else {
-        noteToSave.id = Math.floor(Math.random() * 1000000);
-        noteToSave.updated = new Date().toISOString();
-        notes.push(noteToSave);
-    }
-
-    localStorage.setItem("notesapp-notes", JSON.stringify(notes));
-}
-
-function deleteNote(id) {
-    const notes = getAllNotes();
-    const newNote = notes.filter((note) => note.id != id);
-    localStorage.setItem("notesapp-notes", JSON.stringify(newNote));
-}
-
-
-class App{
-    constructor(root){
+class App {
+    constructor(root) {
         this.notes = [];
         this.activeNote = null;
-        this.view = new NoteView(root,this._handlers());
+        this.view = new NoteView(root, this._handlers());
 
-        
+        this._refreshNotes();
     }
 
-    _handlers(){
+    _refreshNotes() {
+        const notes = getAllNotes();
+        this._setNotes(notes);
+
+        if (notes.length > 0) {
+            this._setActiveNotes(notes[0]);
+        }
+    }
+
+    _setNotes(notes) {
+        this.notes = notes;
+        this.view.updateNoteList(notes);
+        this.view.updateNotePreivewVisibility(notes.length > 0);
+    }
+
+    _setActiveNotes(note) {
+        this.activeNote = note;
+        this.view.updateActiveNote(note);
+    }
+
+    _handlers() {
         return {
-            onNoteSelect : noteId =>{
-                console.log("Selectd Notes : " + noteId);
+            onNoteSelect: noteId => {
+                const selectedNote = this.notes.find(note => note.id == noteId);
+                this._setActiveNotes(selectedNote);
             },
-            onNoteAdd : () =>{
-                console.log("Notes Added");
+            onNoteAdd: () => {
+                const newNote = {
+                    title : "New Note",
+                    body : "Take note..."
+                }
+                saveNote(newNote);
+                this._refreshNotes();
             },
-            onNoteDelete : noteId =>{
-                console.log("Deleted Notes : " + noteId);
+            onNoteDelete: noteId => {
+                deleteNote(noteId);
+                this._refreshNotes();
             },
-            onNoteEdit : (newTitle,newbody) =>{
-                console.log(newTitle);
-                console.log(newbody);
+            onNoteEdit: (newTitle, newbody) => {
+                saveNote({
+                    id : this.activeNote.id,
+                    title : newTitle,
+                    body : newbody
+                })
+                this._refreshNotes();
             },
         };
     }
