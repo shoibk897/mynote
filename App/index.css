@@ -8,24 +8,25 @@ body {
     display: flex;
     height: 80vh;
     width: 75vw;
-    border-radius: 0px 0px 10px 10px ;
+    border-radius: 0px 0px 10px 10px;
     overflow: hidden;
 }
 
 .notes * {
     font-family: sans-serif;
-
 }
 
-/* fix - add transiton */
+/* Sidebar */
 .notes__sidebar {
-    border-right: 2px solid #dddddd;
+    /* border-right: 2px solid #1e1e1e; */
     flex-shrink: 0;
     overflow-y: auto;
     padding: 1em;
     width: 300px;
     display: block;
-    transition:  0.3s ease;
+    transition: 0.3s ease;
+    background-color: #2d2d2d; 
+    color: #ffffff; 
 }
 
 .notes__sidebar.open {
@@ -33,26 +34,46 @@ body {
     display: none;
 }
 
-.notes__del:hover{
-    background-color: red;
-}
 
 .notes__add:hover {
-    background: #00af8c;
+    background: #009b77; 
 }
-.toggle-btn:hover{
-    background: yellow;
+
+.toggle-btn:hover {
+    background: #f7c600;
+}
+
+.nav {
+    width: 75vw;
+    height: 30px;
+    border-radius: 10px 10px 0px 0px;
+    display: flex;
+    align-items: center;
+    background-color: #3c3c3c; 
+    justify-content: end;
+}
+
+.nav-box {
+    height: 15px;
+    width: 15px;
+    border-radius: 10px;
+    /* margin-left: 10px; */
+    margin-right: 10px;
+    border: none;
 }
 
 .notes__list-item {
     padding: 10px;
     cursor: pointer;
+    color: #ffffff; 
+    overflow: hidden;
 }
 
 .notes__list-item--selected {
-    background: #eeeeee;
+    background: #f4f4f4;
     border-radius: 7px;
     font-weight: bold;
+    color:  #333333 ; 
 }
 
 .notes__small-title,
@@ -69,7 +90,7 @@ body {
 }
 
 .notes__small-updated {
-    color: #aaaaaa;
+    color: #555555;
     font-style: italic;
     text-align: right;
     font-size: 14px;
@@ -92,6 +113,7 @@ body {
 .notes__title {
     font-size: 3em;
     font-weight: bold;
+    color: #333333; /* Title color */
 }
 
 .notes__body {
@@ -100,51 +122,37 @@ body {
     line-height: 1.5;
     margin-top: 2em;
     resize: none;
+    color: #555555; 
 }
 
-.bg-black{
-    background-color: black;
-}
-.bg-white{
-    background-color: white;
-}
-.bg-red{
-    background-color: rgb(209, 0, 0);
-}
-.bg-yellow{
-    background-color: rgb(230, 230, 0);
-}
-.bg-green{
-    background-color: green;
+.bg-black {
+    background-color: #1e1e1e; 
 }
 
+.bg-white {
+    background-color: #ffffff; 
+}
 
-.myNotes{
+.bg-red {
+    background-color: rgb(209, 0, 0); 
+}
+
+.bg-yellow {
+    background-color: rgb(255, 204, 0); 
+}
+
+.bg-green {
+    background-color: #00a86b; 
+}
+
+.myNotes {
     height: 100vh;
     width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.nav{
-    width: 75vw;
-    height: 30px;
-    border-radius: 10px 10px 0px 0px ;
-    display: flex;
-    align-items: center;
-    background-color: grey;
-    justify-content: start;
-}
-
-.nav-box{
-    height: 15px;
-    width: 15px;
-    border-radius: 10px;
-    margin-left: 10px;
-    border: 1px solid black;
-
+    background-color: #1e1e1e;
 }
 
 

@@ -1,0 +1,40 @@
+@media only screen and (max-width: 400px) {
+    .notes__sidebar {
+        width: 90%;
+    }
+
+    .notes__small-updated {
+        font-size: 10px;
+    }
+
+    .notes__small-title {
+        font-size: 25px;
+    }
+}
+
+@media only screen and (min-width: 401px) and (max-width: 500px) {
+    .notes__sidebar {
+        width: 90%;
+    }
+    .notes__small-title{
+        font-size: 30px;
+    }
+}
+
+@media only screen and (min-width: 550px) and (max-width: 900px) {
+    .notes__sidebar {
+        width: 40%;
+    }
+
+    .notes__title {
+        font-size: 55px;
+    }
+
+    .notes__small-updated {
+        font-size: 13px;
+    }
+
+    .notes__small-title{
+        font-size: 30px;
+    }
+}
