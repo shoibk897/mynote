@@ -12,21 +12,33 @@ window.addEventListener('DOMContentLoaded', () => {
             }, (idx + 1) * 400)
         });
 
-        setTimeout(()=>{
-            logospan.forEach((span,idx)=>{
+        setTimeout(() => {
+            logospan.forEach((span, idx) => {
 
-                setTimeout(()=>{
+                setTimeout(() => {
                     span.classList.remove('active');
                     span.classList.add('fade');
-                },(idx + 1) * 50)
+                }, (idx + 1) * 50)
             })
-        },2000);
+        }, 2000);
 
-        setTimeout(()=>{
-            intro.style.top ='-100vh';
-        },2300);
+        setTimeout(() => {
+            intro.style.top = '-100vh';
+        }, 2300);
     })
 });
+
+// MOBILE
+setInterval(() => {
+    const allItems = document.querySelectorAll(".notes__list-item");
+    allItems.forEach((item) => {
+        item.onclick = () => {
+            if (window.innerWidth <= 500) {
+                sidebar.classList.toggle("open");
+            }
+        }
+    })
+}, 100);
 
 function render() {
 
@@ -84,9 +96,26 @@ function render() {
 
             this.btnAdd = this.root.querySelector(".notes__add");
             this.btnAdd.addEventListener("click", () => this.onNoteAdd());
-            this.btndel = this.root.querySelector(".notes__del");
+            
             this.inpTitle = this.root.querySelector(".notes__title");
             this.inpBody = this.root.querySelector(".notes__body");
+            
+            this.btndel = this.root.querySelector(".notes__del");
+            this.btndel.addEventListener("click", () => {
+                const selectedNote = document.querySelector(".notes__list-item--selected");
+            
+                if (selectedNote) {
+                    selectedNote.parentNode.removeChild(selectedNote);
+                    const topMostNote = document.querySelector(".notes__list-item");
+                    if (topMostNote) {
+                        topMostNote.classList.add("notes__list-item--selected");
+                        this.onNoteSelect(topMostNote.dataset.noteId);
+                    }
+                    this.onNoteDelete(selectedNote.dataset.noteId);
+                }
+            });
+            
+            
 
             [this.inpTitle, this.inpBody].forEach(inpField => {
                 inpField.addEventListener("blur", () => {
@@ -118,18 +147,11 @@ function render() {
                 noteListContainer.insertAdjacentHTML("beforeend", html);
             }
 
-            
-            let currentNoteId;
             noteListContainer.querySelectorAll(".notes__list-item").forEach(noteItem => {
                 noteItem.addEventListener("click", () => {
                     this.onNoteSelect(noteItem.dataset.noteId)
-                    currentNoteId = noteItem.dataset.noteId;
                 });
             });
-
-            this.btndel.addEventListener("click", () => {
-                this.onNoteDelete(currentNoteId);
-            })
         }
 
         updateActiveNote(note) {
@@ -150,18 +172,6 @@ function render() {
 
         toggleBtn.addEventListener("click", () => sidebar.classList.toggle("open"));
     });
-    
-    // MOBILE
-    setInterval(() => {
-        const allItems = document.querySelectorAll(".notes__list-item");
-        allItems.forEach((item) => {
-            item.onclick = () => {
-                if (window.innerWidth <= 500) {
-                    sidebar.classList.toggle("open");
-                }
-            }
-        })
-    }, 100);
 
     class App {
         constructor(root) {
