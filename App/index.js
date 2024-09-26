@@ -54,10 +54,10 @@ function render() {
         if (existing) {
             existing.title = noteToSave.title;
             existing.body = noteToSave.body;
-            existing.updated = new Date().toISOString();
+            existing.updated = new Date().toString();
         } else {
             noteToSave.id = Math.floor(Math.random() * 1000000);
-            noteToSave.updated = new Date().toISOString();
+            noteToSave.updated = new Date().toString();
             notes.push(noteToSave);
         }
 
@@ -96,14 +96,11 @@ function render() {
 
             this.btnAdd = this.root.querySelector(".notes__add");
             this.btnAdd.addEventListener("click", () => this.onNoteAdd());
-            
-            this.inpTitle = this.root.querySelector(".notes__title");
-            this.inpBody = this.root.querySelector(".notes__body");
-            
+                        
             this.btndel = this.root.querySelector(".notes__del");
             this.btndel.addEventListener("click", () => {
                 const selectedNote = document.querySelector(".notes__list-item--selected");
-            
+                
                 if (selectedNote) {
                     selectedNote.parentNode.removeChild(selectedNote);
                     const topMostNote = document.querySelector(".notes__list-item");
@@ -116,7 +113,8 @@ function render() {
             });
             
             
-
+            this.inpTitle = this.root.querySelector(".notes__title");
+            this.inpBody = this.root.querySelector(".notes__body");
             [this.inpTitle, this.inpBody].forEach(inpField => {
                 inpField.addEventListener("blur", () => {
                     const updatedTitle = this.inpTitle.value.trim();
@@ -222,11 +220,6 @@ function render() {
             };
         }
     }
-
     new App(document.getElementById("app"));
 }
-
-
-
-
 render()

@@ -105,6 +105,7 @@ body {
     /* margin-left: 10px; */
     margin-right: 10px;
     border: none;
+    cursor: pointer;
 }
 
 .notes__list-item {
@@ -112,6 +113,9 @@ body {
     cursor: pointer;
     color: #ffffff; 
     overflow: hidden;
+    border: 1px solid #1e1e1e;
+    border-radius: 10px;
+    margin-top: 10px;
 }
 
 .notes__list-item--selected {
