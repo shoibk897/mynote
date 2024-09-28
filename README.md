@@ -1,6 +1,6 @@
 Here’s a more organized and attractive version of your `README.md`, incorporating icons for social media links and improving the structure:
 
-```markdown
+
 # AuraScribe - Capture Your Thoughts 📝
 
 ## About Me
