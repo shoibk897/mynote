@@ -18,6 +18,13 @@ Hi! I'm *Shoib khan*, a developer passionate about creating applications. *AuraS
 
 ---
 
+## 🚀 Try AuraScribe Live
+
+You can see **AuraScribe** in action by visiting the live version deployed on Vercel:
+
+ 👉 **[AuraScribe on Vercel] : ( https://aurascribe-i7rf.vercel.app )**
+
+---
 ## 📥 How to Download and Install
 
 To run AuraScribe on your PC, follow these simple steps:
