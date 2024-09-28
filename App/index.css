@@ -1,7 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
 html,
 body {
     height: 100%;
     margin: 0;
+    font-family: "Ubuntu", sans-serif;
+    
+}
+
+.aura{
+    color:#ff6161;
 }
 
 .intro-animation {
@@ -30,6 +45,7 @@ body {
   .intro-logo {
     position: relative;
     display: inline-block;
+    font-family: "Ubuntu", sans-serif;
     bottom: 20px;
     opacity: 0;
     font-weight: 600;
@@ -49,159 +65,75 @@ body {
     transition: 0.7s ease-in-out;
   }
 
-.notes {
-    display: flex;
-    height: 80vh;
-    width: 75vw;
-    border-radius: 0px 0px 10px 10px;
-    overflow: hidden;
-}
 
-.notes * {
-    font-family: sans-serif;
-}
-
-/* Sidebar */
-.notes__sidebar {
-    /* border-right: 2px solid #1e1e1e; */
-    flex-shrink: 0;
-    overflow-y: auto;
-    padding: 1em;
-    width: 300px;
-    display: block;
-    transition: 0.3s ease;
-    background-color: #2d2d2d; 
-    color: #ffffff; 
-}
-
-.notes__sidebar.open {
-    border: none;
-    display: none;
-}
-
-
-.notes__add:hover {
-    background: #009b77; 
-}
-
-.toggle-btn:hover {
-    background: #f7c600;
-}
-
-.nav {
-    width: 75vw;
-    height: 30px;
-    border-radius: 10px 10px 0px 0px;
-    display: flex;
-    align-items: center;
-    background-color: #3c3c3c; 
-    justify-content: end;
-}
-
-.nav-box {
-    height: 15px;
-    width: 15px;
-    border-radius: 10px;
-    /* margin-left: 10px; */
-    margin-right: 10px;
-    border: none;
-    cursor: pointer;
-}
-
-.notes__list-item {
-    padding: 10px;
-    cursor: pointer;
-    color: #ffffff; 
-    overflow: hidden;
-    border: 1px solid #1e1e1e;
-    border-radius: 10px;
-    margin-top: 10px;
-}
-
-.notes__list-item--selected {
-    background: #f4f4f4;
-    border-radius: 7px;
-    font-weight: bold;
-    color:  #333333 ; 
-}
-
-.notes__small-title,
-.notes__small-updated {
-    padding: 10px;
-}
-
-.notes__small-title {
-    font-size: 1.2em;
-}
-
-.notes__small-body {
-    padding: 0 10px;
-}
-
-.notes__small-updated {
-    color: #555555;
-    font-style: italic;
-    text-align: right;
-    font-size: 14px;
-}
-
-.notes__preview {
-    display: flex;
-    flex-direction: column;
-    padding: 2em 3em;
-    flex-grow: 1;
-}
-
-.notes__title,
-.notes__body {
-    border: none;
-    outline: none;
-    width: 100%;
-}
-
-.notes__title {
-    font-size: 3em;
-    font-weight: bold;
-    color: #333333; /* Title color */
-}
-
-.notes__body {
-    flex-grow: 1;
-    font-size: 1.2em;
-    line-height: 1.5;
-    margin-top: 2em;
-    resize: none;
-    color: #555555; 
-}
-
-.bg-black {
-    background-color: #1e1e1e; 
-}
-
-.bg-white {
-    background-color: #ffffff; 
-}
-
-.bg-red {
-    background-color: rgb(209, 0, 0); 
-}
-
-.bg-yellow {
-    background-color: rgb(255, 204, 0); 
-}
-
-.bg-green {
-    background-color: #00a86b; 
-}
-
-.myNotes {
+.main {
     height: 100vh;
-    width: 100vw;
+    background-color: #fafafa;
+    padding: 0px 120px;
+}
+
+.navbar {
+    padding: 40px 0px;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: bold;
+}
+.logo_span{
+    color: #ff6161;
+}
+
+.nav_others {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav_others a {
+    text-decoration: none;
+    margin: 0px 10px;
+    color: #ff6161;
+    font-size: 1.2rem;
+}
+
+.content {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+.tag_line{
+    display: grid;
     justify-content: center;
     align-items: center;
-    background-color: #1e1e1e;
+}
+.tag_line h1{
+    font-size: 4rem;
+    font-family: "Poppins", sans-serif;
+    line-height: 70px;
 }
 
+.tag_line p{
+    font-size: 25px;
+    margin: 10px;
+}
 
+.tag_line a{
+    text-decoration: none;
+    color: white;
+    margin-top: 20px;
+    width: 10rem;
+    background-color: #ff6161;
+    padding: 10px;
+    text-align: center;
+    border-radius: 20px;
+}
+
+.art img {
+    height: 35rem;
+}
